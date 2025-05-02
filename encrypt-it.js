@@ -1,7 +1,7 @@
 /*
- * Starter file 
+ * Starter file
  */
-(function() {
+(function () {
   "use strict";
 
   /**
@@ -10,17 +10,43 @@
    * on the page. When this event occurs, the attached function (init) will be called.
    */
   window.addEventListener("load", init);
-
+  console.log("Window loaded!");
   /**
    * TODO: Write a function comment using JSDoc.
    */
   function init() {
     // Note: In this function, we usually want to set up our event handlers
     // for UI elements on the page.
+    document
+      .getElementById("encrypt-it")
+      .addEventListener("click", handleClick);
+
+    document.getElementById("reset").addEventListener("click", handleReset);
   }
 
   // Add any other functions in this area (you should not implement your
   // entire program in the init function, for similar reasons that
   // you shouldn't write an entire Java program in the main method).
+  function handleClick() {
+    const input = document.getElementById("input-text").value;
+    let output = "";
 
+    for (let i = 0; i < input.length; i++) {
+      const char = input[i];
+      if (char >= "a" && char <= "z") {
+        output +=
+          char === "z" ? "a" : String.fromCharCode(char.charCodeAt(0) + 1);
+      } else if (char >= "A" && char <= "Z") {
+        output +=
+          char === "Z" ? "A" : String.fromCharCode(char.charCodeAt(0) + 1);
+      } else {
+        output += char;
+      }
+    }
+    document.getElementById("result-area").textContent = output;
+  }
+
+  function handleReset() {
+    console.log("reset");
+  }
 })();
